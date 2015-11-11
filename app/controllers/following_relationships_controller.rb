@@ -9,4 +9,10 @@ class FollowingRelationshipsController < ApplicationController
       redirect_to user_path(user.id)
     end
   end
+  
+  def destroy
+    user = User.find_by id: params[:user_id]
+    current_user.followed_relationships.find_by(followed_id: user.id).destroy
+    redirect_to user_path(user.id)
+  end
 end
