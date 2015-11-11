@@ -1,8 +1,13 @@
-dashboard
 
-<%= form_for @shout do |f| %>
+
+<%= form_for @text_shout do |f| %>
 	<%= f.text_field :body, placeholder: 'Shout content here' %>
 	<%= f.submit "Shout!" %>
+<% end %>
+
+<%= form_for @photo_shout do |f| %>
+	<%= f.file_field :image %>
+	<%= f.submit 'Shout!' %>
 <% end %>
 
 <%= render @shouts %>
