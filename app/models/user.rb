@@ -1,10 +1,18 @@
 class User < ActiveRecord::Base
 	has_many :shouts
-	has_many :followed_relationships, class_name: "Relationship", foreign_key: :follower_id
-  has_many :followers_relationships, class_name: "Relationship", foreign_key: :followed_id
+	has_many :followed_user_relationships, 
+	  foreign_key: :follower_id,
+	  class_name: "Relationship"
+	has_many :followed_users, through: :followed_user_relationships
+ 
+  has_many :follower_relationships, 
+    foreign_key: :followed_user_id,
+    class_name: "Relationship"
+  has_many :followers, through: :follower_relationships
 
   def following?(user)
-    !!followed_relationships.find_by(followed_id: user.id)
+    !!followed_user_ids.include?(user.id)
   end
 
 end
+
