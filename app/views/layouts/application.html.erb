@@ -9,6 +9,10 @@
 <body>
 	<%= render 'shared/messages' %>
 	<div>
+		<%= form_for(:search, url: search_path, method: :get) do |f| %>
+			<%= f.text_field :term %>
+			<%= f.submit "Search" %>
+		<% end %>
 		<% if signed_in? %>
 			<%= current_user.username %>
 			<%= link_to "Sign out", session_path, method: :delete %>
